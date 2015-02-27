@@ -23,7 +23,8 @@ class SlackWebhookController < ApplicationController
     {
       username: params[:user_name],
       channel: params[:channel_name],
-      message: params[:text]
+      message: params[:text],
+      created_at: Time.at(params[:timestamp].to_f)
     }
   end
 end
