@@ -1,5 +1,6 @@
 class SlackWebhookController < ApplicationController
   before_action :check_token
+  skip_before_filter :verify_authenticity_token
 
   def incoming_message
     message = Message.create(message_params)
