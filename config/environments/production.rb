@@ -76,4 +76,7 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # IP whitelist for non-protected routes
+  config.whitelisted_ips = ENV['WHITELISTED_IPS'].split(',')
 end
