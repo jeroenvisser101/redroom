@@ -4,6 +4,6 @@ class SiteController < ApplicationController
   end
 
   def keep_alive
-    render 'OK'
+    render text: 'OK'
   end
 end
