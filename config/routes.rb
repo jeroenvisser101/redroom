@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
   whitelist = lambda { |req|
-    Redroom::Application.config.whitelisted_ips.include? req.remote_addr
+    whitelisted_ips = Redroom::Application.config.whitelisted_ips
+
+    if whitelisted_ips.is_a? Array
+      whitelisted_ips.include? req.remote_addr
+    else
+      true
+    end
   }
 
   scope constraints: whitelist do

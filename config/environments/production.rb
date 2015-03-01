@@ -78,5 +78,9 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # IP whitelist for non-protected routes
-  config.whitelisted_ips = ENV['WHITELISTED_IPS'].split(',') unless ENV['WHITELISTED_IPS'].nil?
+  if ENV['WHITELISTED_IPS'].nil?
+    config.whitelisted_ips = nil
+  else
+    config.whitelisted_ips = ENV['WHITELISTED_IPS'].split(',')
+  end
 end
