@@ -5,7 +5,6 @@ Rails.application.routes.draw do
 
     whitelisted_ips = Redroom::Application.config.whitelisted_ips
     whitelisted_ips.include? remote_addr
-    Rails.logger.warn('IP: ' << remote_addr)
   }
 
   scope constraints: whitelist do
