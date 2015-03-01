@@ -13,5 +13,7 @@ Rails.application.routes.draw do
     root 'site#index'
   end
 
+  get '/keep-alive' => 'site#keep_alive'
+
   post 'slack/incoming' => 'slack_webhook#incoming_message'
 end
