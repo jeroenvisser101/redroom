@@ -1,0 +1,7 @@
+/**
+ * This file is only used for non-outputting files, which means that the files
+ * imported by this file should never output any CSS by themselves. Files that
+ * you include may declare mixins, functions and variables, though.
+ */
+
+@import "config/colors";

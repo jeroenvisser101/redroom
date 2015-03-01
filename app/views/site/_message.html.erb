@@ -1,1 +1,7 @@
-<li><%= message.username %>: <%= message.message %></li>
+<li class="message-item">
+  <span class="sender -ellipsis" title="<%= message.username %>">
+    <%= message.username %>
+  </span>
+  <span class="message"><%= message.message %></span>
+  <%= relative_time_tag message.created_at, format: :short, class: 'time' %>
+</li>

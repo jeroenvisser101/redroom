@@ -1,0 +1,42 @@
+@import "base";
+@import "compass/typography/text/ellipsis";
+
+.message-item {
+  list-style: none;
+  padding: 10px 20px;
+
+  // The sender of the message
+  > .sender {
+    display: inline-block;
+    width: 150px;
+
+    padding-right: 20px;
+
+    color: $mussel-light;
+    text-align: right;
+    vertical-align: top;
+
+    // Text truncating
+    &.-ellipsis {
+      @include ellipsis;
+    }
+  }
+
+  // Message text
+  > .message {
+    display: inline-block;
+    color: $mussel;
+    width: 700px;
+  }
+
+  // Messages timestamp
+  > .time {
+    text-align: right;
+    vertical-align: top;
+    color: $lotus-darker;
+    font-size: 12px;
+
+    // Adjusting the line height to make sure it's centered
+    line-height: 2;
+  }
+}

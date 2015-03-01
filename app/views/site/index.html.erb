@@ -1,3 +1,12 @@
-<ul>
-  <%= render(partial: 'message', collection: @messages) || 'No messages exist.' %>
-</ul>
+<div class="page-container">
+  <h1>Emergency messages (#redroom)</h1>
+
+  <ul class="message-list">
+    <%= render(partial: 'message', collection: @messages) ||
+        render(partial: 'no_messages') %>
+  </ul>
+
+  <footer class="page-footer">
+    Made using <a href="https://github.com/jeroenvisser101/redroom">redroom</a>.
+  </footer>
+</div>
