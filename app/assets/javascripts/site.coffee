@@ -1,9 +1,10 @@
+#= depend_on components/relative-time
 class Site
   constructor: ->
-    setInterval(@fetchNew, 10000)
+    setInterval(@fetchNew, 2000)
 
   fetchNew: ->
-    since_id = parseInt($('.message-list > li:first-child').data('message-id'))
+    since_id = parseInt($('.message-list > :first-child').data('message-id'))
 
     # Default since_id to 1
     since_id = 1 unless since_id > 0
@@ -20,25 +21,25 @@ class Site
     @getMessage(message).prependTo($('.message-list'))
 
   getMessage: (message) ->
-    list_item = $('<li>', {
+    list_item = $('<div>', {
       class: 'message-item',
       data: {
         'message-id': message.id
       }
     })
 
-    $("<span>", {
+    $("<div>", {
       text: message.username
-      class: 'sender'
+      class: 'sender -ellipsis'
     }).appendTo(list_item)
-    $("<span>", {
+    $("<div>", {
       text: message.message
       class: 'message'
     }).appendTo(list_item)
     new RelativeTime(date: message.created_at)
       .render()
-      .addClass('time')
       .appendTo(list_item)
+      .wrap('<div class="time" />')
 
     list_item
 

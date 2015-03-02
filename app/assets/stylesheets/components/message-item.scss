@@ -1,13 +1,15 @@
 @import "base";
 @import "compass/typography/text/ellipsis";
+@import "compass/css3/flexbox";
 
 .message-item {
   list-style: none;
   padding: 10px 20px;
 
+  @include display-flex;
+
   // The sender of the message
   > .sender {
-    display: inline-block;
     width: 150px;
 
     padding-right: 20px;
@@ -15,6 +17,7 @@
     color: $mussel-light;
     text-align: right;
     vertical-align: top;
+
 
     // Text truncating
     &.-ellipsis {
@@ -24,17 +27,19 @@
 
   // Message text
   > .message {
-    display: inline-block;
+    @include display-flex;
+    @include flex(1);
     color: $mussel;
     width: 700px;
   }
 
   // Messages timestamp
   > .time {
-    text-align: right;
+    @include display-flex;
     vertical-align: top;
     color: $lotus-darker;
     font-size: 12px;
+    padding-left: 20px;
 
     // Adjusting the line height to make sure it's centered
     line-height: 2;

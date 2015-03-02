@@ -1,7 +1,9 @@
-<li class="message-item" data-message-id="<%= message.id %>">
-  <span class="sender -ellipsis" title="<%= message.username %>">
+<div class="message-item" data-message-id="<%= message.id %>">
+  <div class="sender -ellipsis" title="<%= message.username %>">
     <%= message.username %>
-  </span>
-  <span class="message"><%= message.message %></span>
-  <%= relative_time_tag message.created_at, format: :short, class: 'time' %>
-</li>
+  </div>
+  <div class="message"><%= message.message %></div>
+  <div class="time">
+    <%= relative_time_tag message.created_at, format: :short %>
+  </div>
+</div>

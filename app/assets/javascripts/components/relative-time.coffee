@@ -11,10 +11,10 @@ class RelativeTime
     @settings = $.extend(defaults, options)
 
   render: ->
-    console.log(@settings)
-    $('<time>', {
+    time = new RelativeTimeElement()
+    $(time).attr({
       datetime: @settings.date.toISOString()
-      text: strftime(@settings.format, @settings.date)
-    }).attr('is', @settings.is)
+    })
+
 
 window.RelativeTime = RelativeTime
