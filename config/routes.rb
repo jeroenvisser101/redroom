@@ -9,9 +9,11 @@ Rails.application.routes.draw do
 
   scope constraints: whitelist do
     root 'site#index'
+    get 'new' => 'site#new'
   end
 
   get '/keep-alive' => 'site#keep_alive'
 
   post 'slack/incoming' => 'slack_webhook#incoming_message'
+  get 'slack/incoming' => 'slack_webhook#incoming_message'
 end
