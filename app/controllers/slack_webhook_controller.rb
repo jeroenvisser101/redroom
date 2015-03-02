@@ -14,7 +14,7 @@ class SlackWebhookController < ApplicationController
 
   def check_token
     unless params[:token] == Rails.application.secrets.slack_secret_token
-      logger.fatal "Slack secret token does not match configured token. #{Rails.application.secrets.slack_secret_token << ' vs. ' << params[:token]}"
+      logger.fatal "Slack secret token does not match configured token. #{Rails.application.secrets.slack_secret_token.to_s << ' vs. ' << params[:token].to_s}"
       render text: 'Forbidden', status: :forbidden
     end
   end
