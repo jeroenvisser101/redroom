@@ -1,3 +1,5 @@
+![Screenshot](https://www.dropbox.com/s/6imlvf2aet87n0n/Screenshot%202015-03-02%2022.20.17.png?dl=1)
+
 #redroom: for when communication matters most.
 This app is made so you can let your teams without slack see your emergency chat room.
 
