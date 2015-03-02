@@ -7,7 +7,7 @@ class Site
     since_id = parseInt($('.message-list > :first-child').data('message-id'))
 
     # Default since_id to 1
-    since_id = 1 unless since_id > 0
+    since_id = 0 unless since_id > 0
 
     # Fetch new messages
     fetch("/new.json?since_id=#{since_id}").then((response) ->
