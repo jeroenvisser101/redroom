@@ -1,9 +1,12 @@
 (function (window) {
-  window.MessageManager = function () {
+  window.MessageList = function () {
+    // Bind self to this
+    var self = this;
+
     /**
      * Amount of milliseconds between polls.
      *
-     * @type {number}
+     * @type {Number}
      */
     this.interval = 2000;
 
@@ -11,15 +14,23 @@
      * Starts polling the server for new messages.
      */
     this.startPolling = function () {
-      setInterval((this.fetchNew).bind(this), this.interval);
+      setInterval(this.fetchNew, this.interval);
+    };
+
+    /**
+     * Returns the id of the last received message.
+     *
+     * @returns {Number}
+     */
+    this.getLastMessageId = function () {
+      return parseInt($('.message-list > :first-child').data('message-id'));
     };
 
     /**
      * Fetches new messages, adds them to the message list.
      */
     this.fetchNew = function () {
-      var self = this;
-      var since_id = parseInt($('.message-list > :first-child').data('message-id'));
+      var since_id = self.getLastMessageId();
       if (since_id < 0) since_id = 0;
 
       fetch("/new.json?since_id=" + since_id).then(function (response) {
@@ -40,7 +51,6 @@
      * @param message
      */
     this.addMessage = function (message) {
-      var self = this;
       self.renderMessage(message).prependTo($('.message-list'));
     };
 
@@ -58,7 +68,6 @@
           'message-id': message.id
         }
       });
-
 
       renderSender(message.username).appendTo(message_element);
       renderMessageBody(message.message).appendTo(message_element);
@@ -103,17 +112,14 @@
      *
      * @param {string} sender The name of the sender.
      *
-     * @returns {*|jQuery|HTMLElement}
+     * @returns {jQuery}
      * @private
      */
-    var renderSender = function renderSender(sender) {
+    var renderSender = function (sender) {
       return $("<div>", {
         text: sender,
         'class': 'sender -ellipsis'
       });
     };
   };
-
-  window.message_manager = new MessageManager;
-  message_manager.startPolling();
 })(window);
