@@ -8,13 +8,13 @@
      *
      * @type {Number}
      */
-    this.interval = 2000;
+    self.interval = 2000;
 
     /**
      * Starts polling the server for new messages.
      */
-    this.startPolling = function () {
-      setInterval(this.fetchNew, this.interval);
+    self.startPolling = function () {
+      setInterval(self.fetchNew, self.interval);
     };
 
     /**
@@ -22,14 +22,14 @@
      *
      * @returns {Number}
      */
-    this.getLastMessageId = function () {
+    self.getLastMessageId = function () {
       return parseInt($('.message-list > :first-child').data('message-id'));
     };
 
     /**
      * Fetches new messages, adds them to the message list.
      */
-    this.fetchNew = function () {
+    self.fetchNew = function () {
       var since_id = self.getLastMessageId();
       if (since_id < 0) since_id = 0;
 
@@ -46,22 +46,35 @@
     };
 
     /**
+     * Sends a notification for the new message.
+     *
+     * @param {Object} message
+     */
+    self.addNotification = function (message) {
+      new MessageNotification({
+        sender: message.sender,
+        message: message.message
+      }).show();
+    };
+
+    /**
      * Adds new message to the message list.
      *
-     * @param message
+     * @param {Object} message
      */
-    this.addMessage = function (message) {
+    self.addMessage = function (message) {
+      self.addNotification(message);
       self.renderMessage(message).prependTo($('.message-list'));
     };
 
     /**
      * Renders the message-item for the given message_object.
      *
-     * @param message
+     * @param {Object} message
      *
      * @returns {jQuery}
      */
-    this.renderMessage = function (message) {
+    self.renderMessage = function (message) {
       var message_element = $('<div>', {
         'class': 'message-item',
         data: {
