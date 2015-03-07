@@ -1,4 +1,4 @@
-(function (window, document, $) {
+(function (window) {
   window.MessageNotification = function (options) {
     var self = this;
 
@@ -6,19 +6,19 @@
 
     self.show = function () {
       // Only try to send when it exists.
-      if (window.webkitNotifications) {
-        var message_notification = new window.webkitNotifications.createNotification(
-          '<%= asset_path('notification_icon.png') %>',
-          self.options.sender + ' says:',
-          self.options.message
-        );
+      if (typeof window.Notification !== 'undefined') {
+        var notification = new Notification(self.options.username + ' says:', {
+          icon: '<%= asset_path 'notification_icon.png' %>',
+          body: self.options.message
+        });
+        setTimeout(function (){
+          notification.close();
+        }, 5000);
       }
     };
   };
 
   MessageNotification.ensurePermissionGranted = function () {
-    if(window.webkitNotifications && window.webkitNotifications.checkPermission() != 0){
-      window.webkitNotifications.requestPermission();
-    }
+    Notification.requestPermission();
   };
-})(window, document, jQuery);
+})(window);

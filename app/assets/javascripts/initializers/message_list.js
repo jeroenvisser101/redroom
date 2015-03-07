@@ -1,4 +1,4 @@
-//= depend_on ../components/message_manager
+//= depend_on components/message_list.js
 
 // Start polling for new messages.
 var message_list = new MessageList();

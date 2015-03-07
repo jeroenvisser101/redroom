@@ -52,7 +52,7 @@
      */
     self.addNotification = function (message) {
       new MessageNotification({
-        sender: message.sender,
+        username: message.username,
         message: message.message
       }).show();
     };
